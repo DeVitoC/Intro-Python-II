@@ -78,6 +78,15 @@ def adventure_game():
         elif inp == "w":
             # enter the room to the west
             adventurer.move("w")
+        elif inp == "p":
+            while True:
+                item_to_pickup = input("Which item would you like to pick up? (or 'q' to exit) ")
+                if item_to_pickup in adventurer.current_room.items:
+                    adventurer.pickup_item(item_to_pickup)
+                    print(f"You've picked up the {item_to_pickup}")
+                    break
+                else:
+                    print("That is not one of the items in this room.")
         elif inp == "q":
             print(f"Thanks for playing, {adventurer.name}! Come back soon.")
             break 
@@ -90,6 +99,7 @@ Type:
 "s" to move to the room to the south
 "e" to move to the room to the east
 "w" to move to the room to the west
+"p" to select an item to pick up
 "q" to quit
 "help" to see commands
 '''

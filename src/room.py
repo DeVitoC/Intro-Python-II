@@ -13,10 +13,13 @@ class Room:
         return f"{self.name}"
     
     def add_item(self, item):
-        items.append(item)
+        self.items.append(item)
         
     def print_items(self):
         items_string = ""
         for i in self.items:
             items_string += f"{i}\n"
         print(items_string)
+        
+    def item_picked_up(self, item):
+        self.items.remove(item)

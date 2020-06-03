@@ -2,8 +2,8 @@
 # currently.
 
 class Player:
-    global items
-    items = []
+    global inventory
+    inventory = []
     
     def __init__(self, name, current_room):
         self.name = name
@@ -30,3 +30,7 @@ class Player:
                 self.current_room = self.current_room.w_to
             except:
                 print("There is no room to the west")
+                
+    def pickup_item(self, item):
+        inventory.append(item)
+        self.current_room.item_picked_up(item)
