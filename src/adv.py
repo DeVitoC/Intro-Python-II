@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from code import InteractiveConsole
 
 # Declare all the rooms
 
@@ -49,3 +51,53 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+adventurer = Player(room["outside"])
+
+def adventure_game():
+    print("Welcome to Adventure Game. Have fun storming the castle!")
+    
+    while True:
+        print(adventurer.current_room)
+        # print()
+        inp = input('What would you like to do? Type "help" for possible commands:')
+        if inp == "help":
+            print(help_list)
+        elif inp == "n":
+            # enter the room to the north
+            print("n")
+        elif inp == "s":
+            # enter the room to the south
+            print("s")
+        elif inp == "e":
+            # enter the room to the east
+            print("e")
+        elif inp == "w":
+            # enter the room to the west
+            print("w")
+        elif inp == "q":
+            print("Thanks for playing! Come back soon.")
+            break 
+        
+        
+            
+help_list = '''
+Type:
+"n to move to the room to the north
+"s" to move to the room to the south
+"e" to move to the room to the east
+"w" to move to the room to the west
+"q" to quit
+"help" to see commands
+'''
+
+
+adventure_game()
+
+
+
+# header = "Welcome to Adventure Game. Have fun storming the castle!"
+# footer = "Thanks for playing!"
+
+# InteractiveConsole().interact(header, footer)
+
+
