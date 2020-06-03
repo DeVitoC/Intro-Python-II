@@ -57,23 +57,23 @@ def adventure_game():
     print("Welcome to Adventure Game. Have fun storming the castle!")
     
     while True:
-        print(adventurer.current_room)
+        print(f"You are in the {adventurer.current_room}")
         # print()
-        inp = input('What would you like to do? Type "help" for possible commands:')
+        inp = input('What would you like to do? Type "help" for possible commands: ')
         if inp == "help":
             print(help_list)
         elif inp == "n":
             # enter the room to the north
-            print("n")
+            adventurer.move("n")
         elif inp == "s":
             # enter the room to the south
-            print("s")
+            adventurer.move("s")
         elif inp == "e":
             # enter the room to the east
-            print("e")
+            adventurer.move("e")
         elif inp == "w":
             # enter the room to the west
-            print("w")
+            adventurer.move("w")
         elif inp == "q":
             print("Thanks for playing! Come back soon.")
             break 
