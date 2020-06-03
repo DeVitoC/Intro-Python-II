@@ -51,10 +51,13 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-adventurer = Player(room["outside"])
+
 
 def adventure_game():
     print("Welcome to Adventure Game. Have fun storming the castle!")
+    
+    name = input("Enter your name: ")
+    adventurer = Player(name, room["outside"])
     
     while True:
         print(f"You are in the {adventurer.current_room}")
@@ -75,7 +78,7 @@ def adventure_game():
             # enter the room to the west
             adventurer.move("w")
         elif inp == "q":
-            print("Thanks for playing! Come back soon.")
+            print(f"Thanks for playing, {adventurer.name}! Come back soon.")
             break 
         
         
