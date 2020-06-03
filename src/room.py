@@ -3,7 +3,8 @@
 
 class Room:
     global n_to, s_to, e_to, w_to 
-    global items = []
+    global items 
+    items = []
     
     def __init__(self, name, description):
         self.name = name
