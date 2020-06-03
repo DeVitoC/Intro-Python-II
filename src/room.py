@@ -2,13 +2,12 @@
 # description attributes.
 
 class Room:
-    global n_to, s_to, e_to, w_to 
-    global items 
-    items = []
+    global n_to, s_to, e_to, w_to
     
     def __init__(self, name, description):
         self.name = name
         self.description = description
+        self.items = []
         
     def __str__(self):
         return f"{self.name}"

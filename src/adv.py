@@ -61,7 +61,11 @@ def adventure_game():
     
     while True:
         print(f"You are in the {adventurer.current_room}")
-        # print()
+        items_list = ""
+        for i in adventurer.current_room.items:
+            items_list.append(f"{i}\n")
+        print(f"The items in this room are:")
+        print(items_list)
         inp = input('What would you like to do? Type "help" for possible commands: ')
         if inp == "help":
             print(help_list)
