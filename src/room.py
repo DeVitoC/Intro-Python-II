@@ -3,6 +3,7 @@
 
 class Room:
     global n_to, s_to, e_to, w_to 
+    global items = []
     
     def __init__(self, name, description):
         self.name = name
@@ -11,4 +12,5 @@ class Room:
     def __str__(self):
         return f"{self.name}"
     
-    
+    def add_item(self, item):
+        items.append(item)
