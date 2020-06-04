@@ -1,3 +1,4 @@
+from item import Item
 # Implement a class to hold room information. This should have name and
 # description attributes.
 
@@ -7,7 +8,8 @@ class Room:
     def __init__(self, name, description):
         self.name = name
         self.description = description
-        self.items = ["torch", "ring", "helmet"]
+        item1 = Item("torch", "use this to light your way")
+        self.items = [item1, "ring", "helmet"]
         
     def __str__(self):
         return f"{self.name}"

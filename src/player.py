@@ -1,5 +1,6 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
+from item import Item
 
 class Player:
     
@@ -33,6 +34,7 @@ class Player:
     def pickup_item(self, item):
         self.inventory.append(item)
         self.current_room.item_picked_up(item)
+        
         
     def __str__(self):
         return f"{self.name}"

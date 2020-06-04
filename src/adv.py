@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -79,7 +80,7 @@ def print_help(*inp):
     "move south" to move to the room to the south
     "move east" to move to the room to the east
     "move west" to move to the room to the west
-    "take *item*" to select an item to pick up
+    "take *item*" or "take *item* to select an item to pick up
     "i" or "inventory" to view inventory
     "q" or "quit" to quit
     "help" to see commands
@@ -91,6 +92,7 @@ def take_action(action, what):
         "help": print_help,
         "move": adventurer.move,
         "take": pickup_item,
+        "get": pickup_item,
         "i": adventurer.view_inventory,
         "inventory": adventurer.view_inventory,
     }
