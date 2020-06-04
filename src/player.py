@@ -2,12 +2,11 @@
 # currently.
 
 class Player:
-    global inventory
-    inventory = []
     
     def __init__(self, name, current_room):
         self.name = name
         self.current_room = current_room
+        self.inventory = []
         
     def move(self, direction):
         if direction == "n":
@@ -32,5 +31,13 @@ class Player:
                 print("There is no room to the west")
                 
     def pickup_item(self, item):
-        inventory.append(item)
+        self.inventory.append(item)
         self.current_room.item_picked_up(item)
+        
+    def __str__(self):
+        return string(self.name)
+    
+    def view_inventory(self, inp):
+        print("You are currently carrying: ")
+        for i in self.inventory:
+            print(i)
