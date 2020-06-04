@@ -49,93 +49,64 @@ room['treasure'].s_to = room['narrow']
 
 
 def adventure_game():
-    print("Welcome to Adventure Game. Have fun storming the castle!")
-    
-    name = input("Enter your name: ")
-    adventurer = Player(name, room["outside"])
+    print(f"Welcome to Adventure Game, {adventurer}. Have fun storming the castle!")
     
     while True:
         print(f"\nYou are in the {adventurer.current_room}")
         print(f"The items in this room are:")
         adventurer.current_room.print_items()
         inp = input('What would you like to do? Type "help" for possible commands: ') 
-         
-        if inp == "help":
-            print(help_list)
-        elif inp == "n":
-            # enter the room to the north
-            adventurer.move("n")
-        elif inp == "s":
-            # enter the room to the south
-            adventurer.move("s")
-        elif inp == "e":
-            # enter the room to the east
-            adventurer.move("e")
-        elif inp == "w":
-            # enter the room to the west
-            adventurer.move("w")
-        elif inp == "p":
-            # pick up item from room
-            while True:
-                item_to_pickup = input("Which item would you like to pick up? (or 'q' to exit) ")
-                if item_to_pickup in adventurer.current_room.items:
-                    adventurer.pickup_item(item_to_pickup)
-                    print(f"You've picked up the {item_to_pickup}")
-                    break
-                elif item_to_pickup == "q":
-                    break
-                else:
-                    print("That is not one of the items in this room.")
-        elif inp == "i":
-            # view player inventory
-            adventurer.view_inventory()
-        elif inp == "q":
-            print(f"Thanks for playing, {adventurer.name}! Come back soon.")
+        commands = inp.split(" ")
+        if len(commands) > 1:
+            action = commands[0]
+            what = commands[1]
+        elif len(commands) == 1:
+            action = commands[0]
+            what = commands[0]
+        else:
+            print("You didn't enter a command.")
+        
+        if inp[0] == "q":
+            print(f"Thanks for playing, {adventurer}! Come back soon.")
             break 
         else:
-            take_action(inp) 
+            take_action(action, what) 
 
-def print_help(inp):       
+def print_help(*inp):       
     help_list = '''
     Type:
-    "n to move to the room to the north
-    "s" to move to the room to the south
-    "e" to move to the room to the east
-    "w" to move to the room to the west
-    "p" to select an item to pick up
-    "i" to view inventory
-    "q" to quit
+    "move north" to move to the room to the north
+    "move south" to move to the room to the south
+    "move east" to move to the room to the east
+    "move west" to move to the room to the west
+    "take *item*" to select an item to pick up
+    "i" or "inventory" to view inventory
+    "q" or "quit" to quit
     "help" to see commands
     '''
     print(help_list)
 
-def take_action(inp):
+def take_action(action, what):
     actions = {
         "help": print_help,
-        "n": adventurer.move,
-        "s": adventurer.move,
-        "e": adventurer.move,
-        "w": adventurer.move,
-        "p": pickup_item,
+        "move": adventurer.move,
+        "take": pickup_item,
         "i": adventurer.view_inventory,
+        "inventory": adventurer.view_inventory,
     }
-    if inp in actions:
-        action = actions[inp]
-        return action(inp)
+    
+    if action in actions:
+        this_action = actions[action]
+        return this_action(action, what)
     else:
         print("That was not a valid command. Please try again.")
     
-def pickup_item(inp):
-    while True:
-        item_to_pickup = input("Which item would you like to pick up? (or 'q' to exit) ")
-        if item_to_pickup in adventurer.current_room.items:
-            adventurer.pickup_item(item_to_pickup)
-            print(f"You've picked up the {item_to_pickup}")
-            break
-        elif item_to_pickup == "q":
-            break
-        else:
-            print("That is not one of the items in this room.")
+def pickup_item(action, what):
+    if what in adventurer.current_room.items:
+        adventurer.pickup_item(what)
+        print(f"You've picked up the {what}")
+    else:
+        print("That is not one of the items in this room.")
 
 name = input("Enter your name: ")
 adventurer = Player(name, room["outside"])
