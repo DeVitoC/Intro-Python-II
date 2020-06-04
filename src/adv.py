@@ -6,17 +6,13 @@ from player import Player
 room = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons"),
-
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
-
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm."""),
-
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air."""),
-
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
@@ -96,10 +92,11 @@ def adventure_game():
         elif inp == "q":
             print(f"Thanks for playing, {adventurer.name}! Come back soon.")
             break 
-        
-        
-     
-help_list = '''
+        else:
+            take_action(inp) 
+
+def print_help(inp):       
+    help_list = '''
     Type:
     "n to move to the room to the north
     "s" to move to the room to the south
@@ -110,5 +107,37 @@ help_list = '''
     "q" to quit
     "help" to see commands
     '''
+    print(help_list)
+
+def take_action(inp):
+    actions = {
+        "help": print_help,
+        "n": adventurer.move,
+        "s": adventurer.move,
+        "e": adventurer.move,
+        "w": adventurer.move,
+        "p": pickup_item,
+        "i": adventurer.view_inventory,
+    }
+    if inp in actions:
+        action = actions[inp]
+        return action(inp)
+    else:
+        print("That was not a valid command. Please try again.")
+    
+def pickup_item(inp):
+    while True:
+        item_to_pickup = input("Which item would you like to pick up? (or 'q' to exit) ")
+        if item_to_pickup in adventurer.current_room.items:
+            adventurer.pickup_item(item_to_pickup)
+            print(f"You've picked up the {item_to_pickup}")
+            break
+        elif item_to_pickup == "q":
+            break
+        else:
+            print("That is not one of the items in this room.")
+
+name = input("Enter your name: ")
+adventurer = Player(name, room["outside"])
 
 adventure_game()
