@@ -37,7 +37,7 @@ class Player:
     def __str__(self):
         return string(self.name)
     
-    def view_inventory(self, inp):
+    def view_inventory(self):
         print("You are currently carrying: ")
         for i in self.inventory:
             print(i)
