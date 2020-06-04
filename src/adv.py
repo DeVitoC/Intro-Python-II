@@ -63,55 +63,9 @@ def adventure_game(adventurer):
         if inp == "q":
             print(f"Thanks for playing, {adventurer.name}! Come back soon.")
             break 
-        # else:
-        #     take_action(inp)
-        actions = {
-        "help": print_help,
-        "n": adventurer.move,
-        "s": adventurer.move,
-        "e": adventurer.move,
-        "w": adventurer.move,
-        "p": pickup_item,
-        "i": adventurer.view_inventory,
-        }
-        if inp in actions:
-            action = actions[inp]
-            print(f'{action(inp)}')
         else:
-            print("That was not a valid command. Please try again.")    
-         
-        # if inp == "help":
-        #     print(help_list)
-        # elif inp == "n":
-        #     # enter the room to the north
-        #     adventurer.move("n")
-        # elif inp == "s":
-        #     # enter the room to the south
-        #     adventurer.move("s")
-        # elif inp == "e":
-        #     # enter the room to the east
-        #     adventurer.move("e")
-        # elif inp == "w":
-        #     # enter the room to the west
-        #     adventurer.move("w")
-        # elif inp == "p":
-        #     # pick up item from room
-        #     while True:
-        #         item_to_pickup = input("Which item would you like to pick up? (or 'q' to exit) ")
-        #         if item_to_pickup in adventurer.current_room.items:
-        #             adventurer.pickup_item(item_to_pickup)
-        #             print(f"You've picked up the {item_to_pickup}")
-        #             break
-        #         else:
-        #             print("That is not one of the items in this room.")
-        # elif inp == "i":
-        #     # view player inventory
-        #     adventurer.view_inventory()
-        # elif inp == "q":
-        #     print(f"Thanks for playing, {adventurer.name}! Come back soon.")
-        #     break 
-        
-        
+            take_action(inp) 
+
 def print_help(inp):       
     help_list = '''
     Type:
@@ -126,21 +80,21 @@ def print_help(inp):
     '''
     print(help_list)
 
-# def take_action(inp):
-    # actions = {
-    #     "help": print_help,
-    #     "n": adventurer.move,
-    #     "s": adventurer.move,
-    #     "e": adventurer.move,
-    #     "w": adventurer.move,
-    #     "p": pickup_item,
-    #     "i": adventurer.view_inventory,
-    # }
-    # if inp in actions:
-    #     action = actions[inp]
-    #     print(action(inp))
-    # else:
-    #     print("That was not a valid command. Please try again.")
+def take_action(inp):
+    actions = {
+        "help": print_help,
+        "n": adventurer.move,
+        "s": adventurer.move,
+        "e": adventurer.move,
+        "w": adventurer.move,
+        "p": pickup_item,
+        "i": adventurer.view_inventory,
+    }
+    if inp in actions:
+        action = actions[inp]
+        return action(inp)
+    else:
+        print("That was not a valid command. Please try again.")
     
 def pickup_item(inp):
     while True:
