@@ -11,7 +11,10 @@ class Player:
         self.current_room = current_room
         self.inventory = {}
         self.level = 1
-        self.str = int(random() * 10)
+        self.strength = int(random() * 10)
+        self.armor = 0
+        self.health = int(random() * 3) + 7
+        self.equipped_armor = {}
         
     def move(self, action, direction):
         if direction[0] == "n":
@@ -39,9 +42,6 @@ class Player:
         if what in self.current_room.items:
             self.inventory[what] = self.current_room.items[what]
             self.current_room.item_picked_up(what)
-            #item_number = self.inventory.index(what)
-            #inventory[item_number].on_take()
-            #print(f"You've picked up the {what}")
         else:
             print("That is not one of the items in this room.")
         
@@ -54,7 +54,30 @@ class Player:
     def __str__(self):
         return f"{self.name}"
     
-    def view_inventory(self, *inp):
+    def view_inventory(self, *args):
         print("You are currently carrying: ")
         for i in self.inventory:
             print(i)
+            
+    def equip(self, action, armor):
+        if armor not in self.inventory:
+            return
+        elif armor in self.equipped_armor and armor in self.inventory:
+            response = input(f"Do you want to replace your current {armor}? 'y' or 'n'? ")
+            if response == 'y':
+                temp_armor = self.euipped_armor.pop(what)
+                self.equipped_armor[armor] = self.inventory[armor]
+                self.inventory[armor] = temp_armor
+                self.armor += self.equipped_armor[armor].armor_value - temp_armor.armor_value
+            else:
+                return
+        else:
+            self.equipped_armor[armor] = self.inventory.pop(armor)
+            self.armor += self.equipped_armor[armor].armor_value
+            
+    def print_equipped_armor(self, *args):
+        for i in self.equipped_armor:
+            print(f"{i}: {self.equipped_armor[i].description}")
+            
+    def view_stats(self, *args):
+        print(f"Strength: {self.strength}\nArmor: {self.armor}\nHealth: {self.health}")

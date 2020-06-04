@@ -52,22 +52,22 @@ class ArmorSlot(Enum):
 class Helmet(Armor):
     def __init__(self, name, description, armor_value):
         super().__init__(name, description, armor_value)
-        self.slot = HEAD
+        self.slot = ArmorSlot.HEAD
 
 class Chestpeice(Armor):
     def __init__(self, name, description, armor_value):
         super().__init__(name, description, armor_value)
-        self.slot = CHEST
+        self.slot = ArmorSlot.CHEST
         
 class Leggaurd(Armor):
     def __init__(self, name, description, armor_value):
         super().__init__(name, description, armor_value)
-        self.slot = LEGS
+        self.slot = ArmorSlot.LEGS
 
 class Ring(Armor):
     def __init__(self, name, description, armor_value = 0):
         super().__init__(name, description, armor_value)
-        self.slot = FINGER
+        self.slot = ArmorSlot.FINGER
 
 ##################
 # Treasure Classes

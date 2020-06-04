@@ -31,6 +31,10 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Add Lightsource
+torch = Torch('torch', 'a torch that can light up the darkness for 20 turns')
+room['foyer'].add_item(torch)
+
 #
 # Main
 #
@@ -54,7 +58,7 @@ def adventure_game():
     
     while True:
         print(f"\nYou are in the {adventurer.current_room}")
-        print(f"The items in this room are:")
+        # print(f"The items in this room are:")
         adventurer.current_room.print_items()
         inp = input('What would you like to do? Type "help" for possible commands: ') 
         commands = inp.split(" ")
@@ -82,7 +86,11 @@ def print_help(*inp):
     "move west" to move to the room to the west
     "take *item*" or "get *item* to select an item to pick up
     "drop *item*" to drop an item from your inventory
+    "equip *armor*" to equip a peice of armor from your inventory
+    "view" to view stats
     "i" or "inventory" to view inventory
+    "equipped" to view equipped armor
+    "search" to search the room for items
     "q" or "quit" to quit
     "help" to see commands
     '''
@@ -95,6 +103,10 @@ def take_action(action, what):
         "take": adventurer.pickup_item,
         "get": adventurer.pickup_item,
         "drop": adventurer.drop_item,
+        "equip": adventurer.equip,
+        "equipped": adventurer.print_equipped_armor,
+        "view": adventurer.view_stats,
+        "search": adventurer.current_room.print_items
         "i": adventurer.view_inventory,
         "inventory": adventurer.view_inventory,
     }
@@ -104,13 +116,6 @@ def take_action(action, what):
         return this_action(action, what)
     else:
         print("That was not a valid command. Please try again.")
-    
-# def pickup_item(action, what):
-#     if what in adventurer.current_room.items:
-#         adventurer.pickup_item(what)
-#         print(f"You've picked up the {what}")
-#     else:
-#         print("That is not one of the items in this room.")
 
 name = input("Enter your name: ")
 adventurer = Player(name, room["outside"])
