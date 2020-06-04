@@ -1,13 +1,16 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
 from item import Item
+from random import random
 
 class Player:
     
     def __init__(self, name, current_room):
         self.name = name
         self.current_room = current_room
-        self.inventory = []
+        self.inventory = {}
+        self.level = 1
+        self.str = int(random() * 10)
         
     def move(self, action, direction):
         if direction[0] == "n":
@@ -31,10 +34,21 @@ class Player:
             except:
                 print("There is no room to the west")
                 
-    def pickup_item(self, item):
-        self.inventory.append(item)
-        self.current_room.item_picked_up(item)
+    def pickup_item(self, action, what):
+        if what in self.current_room.items:
+            self.inventory[what] = self.current_room.items[what]
+            self.current_room.item_picked_up(what)
+            #item_number = self.inventory.index(what)
+            #inventory[item_number].on_take()
+            #print(f"You've picked up the {what}")
+        else:
+            print("That is not one of the items in this room.")
         
+    def drop_item(self, action, what):
+        if what in self.inventory:
+            self.current_room.add_item(self.inventory[what])
+            dropped_item = self.inventory.pop(what)
+            dropped_item.on_drop()
         
     def __str__(self):
         return f"{self.name}"

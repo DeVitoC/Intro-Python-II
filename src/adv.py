@@ -80,7 +80,8 @@ def print_help(*inp):
     "move south" to move to the room to the south
     "move east" to move to the room to the east
     "move west" to move to the room to the west
-    "take *item*" or "take *item* to select an item to pick up
+    "take *item*" or "get *item* to select an item to pick up
+    "drop *item*" to drop an item from your inventory
     "i" or "inventory" to view inventory
     "q" or "quit" to quit
     "help" to see commands
@@ -91,8 +92,9 @@ def take_action(action, what):
     actions = {
         "help": print_help,
         "move": adventurer.move,
-        "take": pickup_item,
-        "get": pickup_item,
+        "take": adventurer.pickup_item,
+        "get": adventurer.pickup_item,
+        "drop": adventurer.drop_item,
         "i": adventurer.view_inventory,
         "inventory": adventurer.view_inventory,
     }
@@ -103,12 +105,12 @@ def take_action(action, what):
     else:
         print("That was not a valid command. Please try again.")
     
-def pickup_item(action, what):
-    if what in adventurer.current_room.items:
-        adventurer.pickup_item(what)
-        print(f"You've picked up the {what}")
-    else:
-        print("That is not one of the items in this room.")
+# def pickup_item(action, what):
+#     if what in adventurer.current_room.items:
+#         adventurer.pickup_item(what)
+#         print(f"You've picked up the {what}")
+#     else:
+#         print("That is not one of the items in this room.")
 
 name = input("Enter your name: ")
 adventurer = Player(name, room["outside"])

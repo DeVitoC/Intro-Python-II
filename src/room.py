@@ -9,13 +9,15 @@ class Room:
         self.name = name
         self.description = description
         item1 = Item("torch", "use this to light your way")
-        self.items = [item1, "ring", "helmet"]
+        item2 = Item("ring", "a shiny, unenchanted ring with no special properties")
+        item3 = Item("helmet", "a helmet with some minor defensive bonuses")
+        self.items = {item1.name: item1, item2.name: item2, item3.name: item3}
         
     def __str__(self):
         return f"{self.name}"
     
     def add_item(self, item):
-        self.items.append(item)
+        self.items[item.name] = item
         
     def print_items(self):
         items_string = ""
@@ -24,4 +26,5 @@ class Room:
         print(items_string)
         
     def item_picked_up(self, item):
-        self.items.remove(item)
+        removed_item = self.items.pop(item)
+        removed_item.on_take()
