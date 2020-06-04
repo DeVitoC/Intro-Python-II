@@ -1,7 +1,8 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
-from item import Item
 from random import random
+
+from item import *
 
 class Player:
     
