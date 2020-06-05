@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from item import *
+from dungeon_map import *
 
 # Declare all the rooms
 
@@ -50,6 +51,9 @@ room['south hideout'].n_to = room['north hideout']
 torch = Torch('Torch', 'a torch that can light up the darkness for 20 turns')
 room['foyer'].add_item(torch)
 
+# Add Map
+dungeon_map = DungeonMap()
+
 #
 # Main
 #
@@ -95,19 +99,20 @@ def adventure_game():
 def print_help(*inp):       
     help_list = '''
     Type:
-    "move north" to move to the room to the north
-    "move south" to move to the room to the south
-    "move east" to move to the room to the east
-    "move west" to move to the room to the west
+    "move north"         to move to the room to the north
+    "move south"         to move to the room to the south
+    "move east"          to move to the room to the east
+    "move west"          to move to the room to the west
     "take *item*" or "get *item* to select an item to pick up
-    "drop *item*" to drop an item from your inventory
-    "equip *armor*" to equip a peice of armor from your inventory
-    "view" to view stats
-    "i" or "inventory" to view inventory
-    "equipped" to view equipped armor
-    "search" to search the room for items
-    "q" or "quit" to quit
-    "help" to see commands
+    "drop *item*"        to drop an item from your inventory
+    "equip *armor*"      to equip a peice of armor from your inventory
+    "view"               to view stats
+    "i" or "inventory"   to view inventory
+    "equipped"           to view equipped armor
+    "search"             to search the room for items
+    "map"                to view dungeon map
+    "q" or "quit"        to quit
+    "help"               to see commands
     '''
     print(help_list)
 
@@ -122,6 +127,7 @@ def take_action(action, what):
         "equipped": adventurer.print_equipped_armor,
         "view": adventurer.view_stats,
         "search": adventurer.current_room.print_items,
+        "map": dungeon_map.show_map,
         "i": adventurer.view_inventory,
         "inventory": adventurer.view_inventory,
     }
