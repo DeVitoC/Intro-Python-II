@@ -1,5 +1,6 @@
 # A class that defines the items that are in rooms and that players can pick up
 from enum import Enum
+from myEnums import *
 
 class Item:
     def __init__(self, name, description):
@@ -43,12 +44,6 @@ class Armor(Item):
         super().__init__(name, description)
         self.armor_value = armor_value
         
-class ArmorSlot(Enum):
-    HEAD = "head"
-    CHEST = "chest"
-    LEGGAURD = "legs"
-    FINGER = "finger"
-        
 class Helmet(Armor):
     def __init__(self, name, description, armor_value):
         super().__init__(name, description, armor_value)
@@ -59,7 +54,7 @@ class Chestpeice(Armor):
         super().__init__(name, description, armor_value)
         self.slot = ArmorSlot.CHEST
         
-class Leggaurd(Armor):
+class Legguard(Armor):
     def __init__(self, name, description, armor_value):
         super().__init__(name, description, armor_value)
         self.slot = ArmorSlot.LEGS
@@ -117,3 +112,23 @@ class StrengthPotion(Consumable):
         
     def use(self):
         return self.effect
+    
+    
+item_types = {
+    0: ('Torch', 'a torch that can light up the darkness for 20 turns'),
+    1: ('Lamp', 'a lamp that can light up the darkness for 40 turns'),
+    2: ('Helmet', 'a helmet with minor defensive capabilities', 2),
+    3: ('Helmet', 'a helmet with medium defensive capabilities', 4),
+    4: ('Helmet', 'a helmet with major defensive capabilities', 8),
+    5: ('Chestpeice', 'a Chestpeice with minor defensive capabilities', 4),
+    6: ('Chestpeice', 'a Chestpeice with medium defensive capabilities', 8),
+    7: ('Chestpeice', 'a Chestpeice with major defensive capabilities', 12),
+    8: ('Legguard', 'a legguard with minor defensive capabilities', 4),
+    9: ('Legguard', 'a legguard with medium defensive capabilities', 8),
+    10: ('Legguard', 'a legguard with major defensive capabilities', 12),
+    11: ('Ring', 'a ring with no defensive capabilities'),
+    12: ('Coins', 'a pile of coins', 100),
+    13: ('Diamond', 'a valuable diamond', 1000),
+    14: ("Health Potion", "A potion that will restore health", 15),
+    15: ("Strength Potion", "a potion that will boost strength for a time", 10, 10)
+}

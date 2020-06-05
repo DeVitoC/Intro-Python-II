@@ -5,8 +5,7 @@ from item import *
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+    'outside':  Room("Outside Cave Entrance", """North of you, the cave mount beckons"""),
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
@@ -59,7 +58,7 @@ def adventure_game():
     while True:
         print(f"\nYou are in the {adventurer.current_room}")
         # print(f"The items in this room are:")
-        adventurer.current_room.print_items()
+        # adventurer.current_room.print_items()
         inp = input('What would you like to do? Type "help" for possible commands: ') 
         commands = inp.split(" ")
         if len(commands) > 1:
@@ -106,7 +105,7 @@ def take_action(action, what):
         "equip": adventurer.equip,
         "equipped": adventurer.print_equipped_armor,
         "view": adventurer.view_stats,
-        "search": adventurer.current_room.print_items
+        "search": adventurer.current_room.print_items,
         "i": adventurer.view_inventory,
         "inventory": adventurer.view_inventory,
     }

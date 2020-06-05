@@ -1,7 +1,6 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
 from random import random
-
 from item import *
 
 class Player:
@@ -65,7 +64,7 @@ class Player:
         elif armor in self.equipped_armor and armor in self.inventory:
             response = input(f"Do you want to replace your current {armor}? 'y' or 'n'? ")
             if response == 'y':
-                temp_armor = self.euipped_armor.pop(what)
+                temp_armor = self.equipped_armor.pop(armor)
                 self.equipped_armor[armor] = self.inventory[armor]
                 self.inventory[armor] = temp_armor
                 self.armor += self.equipped_armor[armor].armor_value - temp_armor.armor_value
