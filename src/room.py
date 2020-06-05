@@ -7,14 +7,12 @@ from myEnums import *
 class Room:
     global n_to, s_to, e_to, w_to
     
-    def __init__(self, name, description):
+    def __init__(self, name, description, length, width):
         self.name: str = name
         self.description: str = description
-        # item1: HealthPotion = HealthPotion("Health potion", "use this to restore health", 20)
-        # item2: Ring = Ring("Ring", "a shiny, unenchanted ring with no special properties")
-        # item3: Helmet = Helmet("Helmet", "a helmet with some minor defensive bonuses", 2)
         self.items = self.populate_items()
-        # self.items = {item1.name: item1, item2.name: item2, item3.name: item3}
+        self.length = length
+        self.width = width
     
     def populate_items(self):
         temp_dict = {}
