@@ -2,6 +2,9 @@
 # currently.
 from random import random
 from item import *
+from room import Room
+from monster import *
+from combat import Combat
 
 class Player:
     
@@ -36,6 +39,7 @@ class Player:
                 self.current_room = self.current_room.w_to
             except:
                 print("There is no room to the west")
+        self.look_for_monster()
                 
     def pickup_item(self, action, what):
         if what in self.current_room.items:
@@ -43,6 +47,14 @@ class Player:
             self.current_room.item_picked_up(what)
         else:
             print("That is not one of the items in this room.")
+            
+    def look_for_monster(self):
+        if self.current_room.monster == None:
+            return 
+        else:
+            monster = self.current_room.monster
+            new_combat = Combat()
+            new_combat.fight(self, monster)
         
     def drop_item(self, action, what):
         if what in self.inventory:

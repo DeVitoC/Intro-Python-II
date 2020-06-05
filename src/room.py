@@ -1,6 +1,7 @@
 from item import *
-from random import random
+from random import random, choice
 from myEnums import *
+from monster import *
 # Implement a class to hold room information. This should have name and
 # description attributes.
 
@@ -13,17 +14,24 @@ class Room:
         self.items = self.populate_items()
         self.length = length
         self.width = width
+        self.monster = self.random_monster()
     
     def populate_items(self):
         temp_dict = {}
         rand_num = int(round(random() * 3))
         for i in range(rand_num):
-            item_from_dict = int(round(random() * 15))
-            new_item_tuple = item_types[item_from_dict]
-            new_item = self.create_item(new_item_tuple)
+            name, item = choice(list(item_types.items()))
+            new_item = self.create_item(item)
             temp_dict[new_item.name] = new_item
         return temp_dict
-            
+        
+    def random_monster(self):
+        is_monster = random() < 0.5
+        if is_monster:
+            monster_string = choice([Imp, Goblin, Orc])
+            return monster_string()
+        else:
+            return None
         
     def __str__(self):
         return f"{self.name}"
