@@ -17,6 +17,7 @@ class Player:
         self.armor = 0
         self.health = int(random() * 3) + 7
         self.equipped_armor = {}
+        self.max_health = self.health
         
     def move(self, action, direction):
         if direction[0] == "n":
@@ -91,4 +92,4 @@ class Player:
             print(f"{i}: {self.equipped_armor[i].description}")
             
     def view_stats(self, *args):
-        print(f"Strength: {self.strength}\nArmor: {self.armor}\nHealth: {self.health}")
+        print(f"Strength: {self.strength}\nArmor: {self.armor}\nMax Health: {self.max_health}\nHealth: {self.health}")

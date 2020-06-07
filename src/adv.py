@@ -7,23 +7,17 @@ from dungeon_map import *
 
 room = {
     'outside':  Room("Outside Cave Entrance", """North of you, the cave mount beckons""", 2, 2),
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", 2, 2),
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", 2, 4),
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", 1, 8),
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", 3, 6),
+    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east.""", 2, 2),
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. 
+                     Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", 2, 4),
+    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", 1, 8),
+    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.""", 3, 6),
     # newly added rooms
     'secret passage': Room("Secret Passageway", """You've discovered a secret passage under the mountain at the back of the treasure chamber!""", 1, 4), 
     'bunker': Room("Bunker", "You've entered a room that seems to ahve once been a hidden military room", 2, 2), 
     'north hideout': Room("North Hideout", "This room seems to have once been a room where this family could hide in times of danger.", 2, 2), 
     'south hideout': Room("South Hideout", "This room is the south half of the secret hideout. This side seemed to be where the family would sleep.", 2, 2)
 }
-
 
 # Link rooms together
 
@@ -77,6 +71,7 @@ def adventure_game():
     
     while True:
         print(f"\nYou are in the {adventurer.current_room}")
+        print(f"{adventurer.current_room.description}")
         # print(f"The items in this room are:")
         # adventurer.current_room.print_items()
         inp = input('What would you like to do? Type "help" for possible commands: ') 
@@ -116,7 +111,7 @@ def print_help(*inp):
     '''
     print(help_list)
 
-def take_action(action, what):
+def take_action(action: str, what):
     actions = {
         "help": print_help,
         "move": adventurer.move,

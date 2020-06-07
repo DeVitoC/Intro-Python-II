@@ -7,6 +7,9 @@ class Monster:
         self.armor = 0
         self.health = 0
         
+    def view_stats(self, *args):
+        print(f"{self.name}:\nStrength: {self.strength}\nArmor: {self.armor}\nHealth: {self.health}")
+        
 
 class Imp(Monster):
     def __init__(self, name = "Imp"):
